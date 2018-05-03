@@ -6,5 +6,8 @@ export default {
       icon: 'setting',
       path: '/settings'
     }
-  ]
+  ],
+  onSearch: () => {
+    console.log('HomePageSettings.js 11 ');
+  }
 }

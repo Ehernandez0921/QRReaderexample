@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomePageSettings from './HomePageSettings'
 class Home extends Component {
   componentDidMount = (props) => {
-    this.props.updateMenuItems(HomePageSettings.menuItems)
+    this.props.setPageSettings(HomePageSettings)
   }
   render() {
     return (
