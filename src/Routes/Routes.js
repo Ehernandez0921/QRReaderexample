@@ -12,7 +12,7 @@ class Routes extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" render={props => <LoadableHome {...this.props} />} />
+        <Route exact path="/" render={props => <LoadableHome {...this.props} {...props} />} />
       </div>
     );
   }
