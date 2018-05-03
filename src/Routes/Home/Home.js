@@ -6,8 +6,8 @@ class Home extends Component {
   }
   render() {
     return (
-      <div onClick={this.props.toggleDrawer}>
-        test
+      <div >
+        This is the Home page. Edit the Hompepage and add any routes and settings at '/src/Routes' foder in the project. Will add guide to readMe in the folder. just browse in explorer
       </div>
     );
   }
