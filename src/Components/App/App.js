@@ -17,8 +17,10 @@ class App extends Component {
   goTo = (path) => {
     this.props.history.push(path);
   }
+  onHeaderSearch = (e) => {
+    this.props.pageSettings.onSearch && this.props.pageSettings.onSearch(e, this)
+  }
   render() {
-    console.log(this, 'App.js 20 ');
     const drawerProps = {
       ...this.props.drawer,
       toggleDrawer: this.toggleDrawer
@@ -33,7 +35,10 @@ class App extends Component {
       <Layout style={{ minHeight: '100vh' }}>
         <DowDrawer {...drawerProps} />
         <Layout>
-          <DowHeader {...headerProps}{...this.props.pageSettings} />
+          <DowHeader
+            {...headerProps}
+            {...this.props.pageSettings}
+            onSearch={this.props.pageSettings.onSearch ? this.onHeaderSearch : undefined} />
           <Row>
             <Col xs={0} sm={24}>
               <Breadcrumb location={this.props.location} goTo={this.goTo} />
