@@ -1,13 +1,10 @@
 export default {
   menuItems: [
     {
-      name: 'settings',
-      title: 'Settings',
-      icon: 'setting',
-      path: '/settings'
+      name: 'test',
+      title: 'test',
+      icon: 'question-circle-o',
+      path: '/cte'
     }
   ],
-  onSearch: () => {
-    console.log('HomePageSettings.js 11 ');
-  }
 }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux';
 import { mapDispatchToProps, mapStateToProps } from './AppConnector';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import DowHeader from '../DowHeader/DowHeader';
 import DowDrawer from '../DowDrawer/DowDrawer';
+import Breadcrumb from '../BreadCrumb/BreadCrumb'
 import AppConsts from '../../Store/DataState/App/AppConsts';
 import Routes from '../../Routes/Routes'
 const { Content } = Layout;
@@ -13,10 +14,11 @@ class App extends Component {
   toggleDrawer = () => {
     this.props.toggleDrawer(!this.props.drawer.show)
   };
-  onHeaderSearch = (e) => {
-    console.log(e, 'App.js 17 ');
+  goTo = (path) => {
+    this.props.history.push(path);
   }
   render() {
+    console.log(this, 'App.js 20 ');
     const drawerProps = {
       ...this.props.drawer,
       toggleDrawer: this.toggleDrawer
@@ -28,19 +30,22 @@ class App extends Component {
       setSearchValue: this.props.setSearchValue,
     }
     return (
-      <Router>
-        <Layout style={{ minHeight: '100vh' }}>
-          <DowDrawer {...drawerProps} />
-          <Layout>
-            <DowHeader {...headerProps}{...this.props.pageSettings} />
-            <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-              <Routes {...this.props} />
-            </Content>
-          </Layout>
+      <Layout style={{ minHeight: '100vh' }}>
+        <DowDrawer {...drawerProps} />
+        <Layout>
+          <DowHeader {...headerProps}{...this.props.pageSettings} />
+          <Row>
+            <Col xs={0} sm={24}>
+              <Breadcrumb location={this.props.location} goTo={this.goTo} />
+            </Col>
+          </Row>
+          <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
+            <Routes {...this.props} />
+          </Content>
         </Layout>
-      </Router>
+      </Layout>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
