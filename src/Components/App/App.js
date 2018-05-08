@@ -17,6 +17,10 @@ class App extends Component {
   goTo = (path) => {
     this.props.history.push(path);
   }
+  goHome = (message) => {
+    //TODO: will create message to show
+    this.props.history.push('/')
+  }
   onHeaderSearch = (e) => {
     this.props.pageSettings.onSearch && this.props.pageSettings.onSearch(e, this)
   }
