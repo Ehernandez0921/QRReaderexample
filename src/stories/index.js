@@ -23,4 +23,12 @@ storiesOf('Button', module)
   ));
 
 storiesOf('DowTable', module)
-  .add('test', () => <DowTable dataSource={data} columns={columns}></DowTable>);
+  .add('test', () => <DowTable
+    dataSource={data}
+    columns={columns}
+    onRow={record => ({
+      onClick: () => {
+        console.log(record, 'index.js 31 ');
+      }
+    })}
+  ></DowTable>);
