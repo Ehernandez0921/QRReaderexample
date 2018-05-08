@@ -23,7 +23,7 @@ class DowTable extends Component {
     this.setState({ searchText: searchValue });
   }
   makeColumnsFilterable = (columns) => {
-    if (columns[0].filter) return columns;
+    if (columns.length > 0 && columns[0].filter) return columns;
     const filteredColumns = columns.map((column, index) => {
       const tmpColumn = column;
       const columnFilter = _.chain(this.props.dataSource)
