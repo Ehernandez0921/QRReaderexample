@@ -53,6 +53,7 @@ export default {
   model: {
     id: 1,
     name: 'Eddy Hernandez',
-    birthDay: '01/01/2015'
+    birthDay: '01/01/2015',
+    department: 'test3'
   }
 }
