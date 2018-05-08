@@ -83,7 +83,7 @@ class DowTable extends Component {
       }
     console.log(tmpColumns, 'DowTable.js 87 ');
     return (
-      <Table {...this.props} dataSource={tableData} columns={tmpColumns} rowKey="id" pagination={pagination} />
+      <Table {...this.props} dataSource={tableData} columns={tmpColumns} rowKey="id" pagination={pagination} size={tmpColumns.length > 6 ? 'small' : 'middle'} />
     );
   }
 }
