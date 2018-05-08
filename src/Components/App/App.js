@@ -49,7 +49,7 @@ class App extends Component {
             </Col>
           </Row>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            <Routes {...this.props} goTo={this.goTo} />
+            <Routes {...this.props} goTo={this.goTo} goHome={this.goHome} />
           </Content>
         </Layout>
       </Layout>
