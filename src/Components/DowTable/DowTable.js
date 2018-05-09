@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import { Table, Input, Button } from 'antd';
+import { Table, Input, Button, Row, Col } from 'antd';
+import DowButton from './DowTableButton'
 class DowTable extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +12,8 @@ class DowTable extends Component {
     }
     this.searchColumn = _.debounce(this.searchColumn, 300);
   }
+  onButtonClick = (buttonEvent, button) => button.onClick && button.onClick(buttonEvent, this);
+
   searchColumn = (searchValue, id) => {
     const searchFilters = this.state.searchFilters.filter(item => item.id !== id);
     searchValue !== '' && searchFilters.push({ id: id, searchValue: searchValue });
@@ -72,18 +75,28 @@ class DowTable extends Component {
     )
     return tmpData;
   }
+
   render() {
-    const tmpColumns = this.makeColumnsFilterable(this.props.columns);
-    const tableData = this.filteredTable(this.props.dataSource);
-    const pagination = this.props.pagination ||
+    const { columns, buttons, dataSource, pagination } = this.props;
+    const tmpColumns = this.makeColumnsFilterable(columns);
+    const tableData = this.filteredTable(dataSource);
+    const tmpPagination = pagination ||
       {
         showSizeChanger: true,
         showQuickJumper: true,
         pageSizeOptions: ['10', '25', '50', '100', tableData.length.toString()]
       }
-    console.log(tmpColumns, 'DowTable.js 87 ');
     return (
-      <Table {...this.props} dataSource={tableData} columns={tmpColumns} rowKey="id" pagination={pagination} size={tmpColumns.length > 6 ? 'small' : 'middle'} />
+      <div>
+        {buttons && buttons.map((button) =>
+          <DowButton {...button} key={`tableButton${button.name}`} onButtonClick={this.onButtonClick} />
+        )}
+        <Row>
+          <Col sm={0} md={24}>
+            <Table {...this.props} dataSource={tableData} columns={tmpColumns} rowKey="id" pagination={tmpPagination} size={tmpColumns.length > 6 ? 'small' : 'middle'} />
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

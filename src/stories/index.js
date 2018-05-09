@@ -8,7 +8,7 @@ import { Button, Welcome } from '@storybook/react/demo';
 import DowTable from '../Components/DowTable/DowTable';
 import DowDetails from '../Components/DowDetails/DowDetails';
 import data from './serverFiles/records.json';
-import { columns } from './settingFiles/tableSettings'
+import { columns, tableButtons } from './settingFiles/tableSettings'
 import detailsProps from './settingFiles/detailsSettings'
 import 'antd/dist/antd.css';
 
@@ -28,6 +28,7 @@ storiesOf('DowTable', module)
   .add('test', () => <DowTable
     dataSource={data}
     columns={columns}
+    buttons={tableButtons}
     onRow={record => ({
       onClick: () => {
         console.log(record, 'index.js 31 ');
