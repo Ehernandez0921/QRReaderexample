@@ -5,7 +5,7 @@ class DowTableButtons extends Component {
     this.props.onClick && this.props.onButtonClick(e, this.props)
   }
   render() {
-    const { title, name } = this.props;
+    const { title, name, onButtonClick, ...restOfProps } = this.props;
     return (
       <Button style={{
         borderTop: 0,
@@ -17,7 +17,7 @@ class DowTableButtons extends Component {
         marginRight: 10,
         marginLeft: 10
       }}
-
+        {...restOfProps}
         onClick={this.onButtonClick}
       >{title}</Button>
     );
