@@ -5,7 +5,6 @@ const HeaderReducer = (state = tableModel, action) => {
     case tableConsts.SET_LOADING:
       return { ...state, loading: action.payload };
     case tableConsts.SET_FILTERED_RECORDS:
-      action.payload;
       return { ...state, filteredRecords: action.payload };
     default:
       return state;
