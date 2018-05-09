@@ -1,6 +1,20 @@
+import { TableActions } from '../../Store/UiState/UiActions';
+export const mapTableStateToProps = (state) => {
+  return state;
+};
+export const mapTableDispatchToProps = (dispatch) => {
+  return {
+    tableActions: {
+      setLoading: loading => dispatch(TableActions.setLoading(loading)),
+      setFilteredRecords: filteredRecords => dispatch(TableActions.setFilteredRecords(filteredRecords))
+    }
+  };
+};
+
 export const columns = [
   { title: 'id', dataIndex: 'id', key: 'id' },
   { title: 'numTrackAppRej', dataIndex: 'numTrackAppRej', key: 'numTrackAppRej' },
+  { title: 'Po', dataIndex: 'strPo', key: 'strPo' }
 ];
 /**
  * @param {string} title 'title to be shown on the button
@@ -20,3 +34,9 @@ export const tableButtons = [
     name: 'testAnother'
   }
 ]
+export default {
+  mapTableStateToProps,
+  mapTableDispatchToProps,
+  columns,
+  tableButtons
+}

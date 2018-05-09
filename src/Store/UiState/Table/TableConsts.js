@@ -1,0 +1,7 @@
+export const SET_FILTERED_RECORDS = 'SET_FILTERED_RECORDS'
+export const SET_LOADING = 'SET_LOADING'
+
+export default {
+  SET_FILTERED_RECORDS,
+  SET_LOADING
+}
