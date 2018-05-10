@@ -1,3 +1,6 @@
+import { userApi } from "./UserConsts";
 export const fetchUser = (userId) => {
-  return fetch('www.dow.com')
+  return fetch(userApi, {
+    credentials: 'include'
+  })
 }

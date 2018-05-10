@@ -11,6 +11,9 @@ import Routes from '../../Routes/Routes'
 const { Content } = Layout;
 
 class App extends Component {
+  componentDidMount = () => {
+    this.props.userActions.fetchMe();
+  }
   toggleDrawer = () => {
     this.props.toggleDrawer(!this.props.drawer.show)
   };
@@ -35,6 +38,7 @@ class App extends Component {
       appName: AppConsts.appName,
       setSearchValue: this.props.setSearchValue,
     }
+    console.log(this.props, 'App.js 41 ');
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <DowDrawer {...drawerProps} />
