@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { debounce, chain, map, uniq, isEqual, uniqBy } from 'lodash';
-import { Table, Input, Button, Row, Col } from 'antd';
+import { debounce, chain, } from 'lodash';
+import { Table, Input, Row, Col } from 'antd';
 import DowButton from './DowTableButton'
-const rowSelection = {
-  onChange: (selectedRowKeys, selectedRows) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  onSelect: (record, selected, selectedRows) => {
-    console.log(record, selected, selectedRows);
-  },
-  onSelectAll: (selected, selectedRows, changeRows) => {
-    console.log(selected, selectedRows, changeRows);
-  },
-};
+// const rowSelection = {
+//   onChange: (selectedRowKeys, selectedRows) => {
+//     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+//   },
+//   onSelect: (record, selected, selectedRows) => {
+//     console.log(record, selected, selectedRows);
+//   },
+//   onSelectAll: (selected, selectedRows, changeRows) => {
+//     console.log(selected, selectedRows, changeRows);
+//   },
+// };
 class DowTable extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +42,7 @@ class DowTable extends Component {
   makeColumnsFilterable = (columns) => {
     if (columns.length > 0 && columns[0].filter) return columns;
     const filteredColumns = columns.map((column, index) => {
-      const tmpColumn = column;
+      // const tmpColumn = column;
       const columnFilter = chain(this.fullFilter(this.props.dataSource))
         .map(item => item[column.dataIndex])
         .uniq()
@@ -57,9 +57,11 @@ class DowTable extends Component {
           }))
           : undefined,
         onFilter: (value, record) => {
+          /* eslint-disable */
           return value === 'BLANK' ?
             (record[column.dataIndex] || '').length === 0 :
-            record[column.dataIndex] == value
+            record[column.dataIndex] == value;
+          /* eslint-enable */
         },
         title: <div style={{ textAlign: 'center' }} key={`${column.dataIndex}headerColumn`}>
           {column.title}
@@ -113,8 +115,8 @@ class DowTable extends Component {
       return tmpData = this.nestedFilter(
         tmpData,
         data =>
-          (newFilters[key].includes(data[key] && data[key].toString()) ||
-            newFilters[key].includes('BLANK') && !data[key])
+          newFilters[key].includes(data[key] && data[key].toString()) ||
+          (newFilters[key].includes('BLANK') && !data[key])
       )
     });
     return tmpData;
