@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { isEmpty } from 'lodash'
 import { Form, Input, Col, DatePicker, Select } from 'antd';
-import DowField from './DowField';
+// import DowField from './DowField';
 import moment from 'moment';
 const FormItem = Form.Item;
 const { Option } = Select;
 const { TextArea } = Input;
-function hasErrors(fieldsError) {
-  return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+// function hasErrors(fieldsError) {
+//   return Object.keys(fieldsError).some(field => fieldsError[field]);
+// }
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -28,9 +27,9 @@ class HorizontalLoginForm extends Component {
     let customProps = {};
     const {
       getFieldDecorator,
-      getFieldsError,
-      getFieldError,
-      isFieldTouched
+      // getFieldsError,
+      // getFieldError,
+      // isFieldTouched
     } = this.props.form;
     const {
       name,
@@ -76,8 +75,16 @@ class HorizontalLoginForm extends Component {
     this.props.onFormSubmit && this.props.onFormSubmit(e);
   }
   render() {
-    const { fields, form, model } = this.props;
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = form;
+    const {
+      fields,
+      // form 
+    } = this.props;
+    // const {
+    //   getFieldDecorator,
+    //   getFieldsError,
+    //   getFieldError,
+    //   isFieldTouched
+    // } = form;
     return (
       <Form onSubmit={this.handleSubmit}>
         {fields && fields.map((field, fieldIndex) => {
@@ -104,18 +111,18 @@ export default Form.create({
     const { model, fields } = props;
     const tmpProps = {};
     let value;
-    Object.keys(props.model).forEach((key, index) => {
+    Object.keys(model).forEach((key, index) => {
       const field = fields.find(item => item.name === key)
       if (field) {
         switch (field.fieldType) {
           case 'date':
-            value = moment(props.model[key])
+            value = moment(model[key])
             break;
           default:
-            value = props.model[key]
+            value = model[key]
         }
       } else {
-        value = props.model[key]
+        value = model[key]
       }
       tmpProps[key] = Form.createFormField({
         value
