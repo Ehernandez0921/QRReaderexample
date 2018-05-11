@@ -22,12 +22,13 @@ class DowTable extends Component {
       searchFilters: [],
       pagination: {},
       filters: {},
-      sorter: {}
+      sorter: {},
+      filteredInfo: null
     }
     this.searchColumn = debounce(this.searchColumn, 300);
   }
   componentWillReceiveProps = (nextProps) => {
-    if (!isEqual(this.props.dataSource, nextProps.dataSource)) this.setState({ searchFilters: [], searchText: '', filters: {} })
+    if (!isEqual(this.props.dataSource, nextProps.dataSource)) this.setState({ searchFilters: [], searchText: '', filteredInfo: null })
   }
   onButtonClick = (buttonEvent, button) => button.onClick && button.onClick(buttonEvent, this);
 
@@ -43,6 +44,8 @@ class DowTable extends Component {
     this.setState({ searchText: { ...this.state.searchText, [dataIndex]: searchValue } });
   }
   makeColumnsFilterable = (columns) => {
+    let { filteredInfo } = this.state;
+    filteredInfo = filteredInfo || {};
     if (columns.length > 0 && columns[0].filter) return columns;
     const filteredColumns = columns.map((column, index) => {
       // const tmpColumn = column;
@@ -59,6 +62,7 @@ class DowTable extends Component {
             value: item || 'BLANK'
           }))
           : undefined,
+        filteredValue: filteredInfo[column.dataIndex] || null,
         onFilter: (value, record) => {
           /* eslint-disable */
           return value === 'BLANK' ?
@@ -107,10 +111,11 @@ class DowTable extends Component {
   defaultFilterData = (tableData) => {
     if (!tableData) tableData = this.fullFilter(this.props.dataSource);
     let tmpData = tableData.slice(0)
-    const { filters } = this.state;
+    let { filteredInfo } = this.state;
+    filteredInfo = filteredInfo || {};
     const newFilters = {};
-    Object.keys(filters).forEach(key => {
-      if (filters[key].length > 0) newFilters[key] = filters[key]
+    Object.keys(filteredInfo).forEach(key => {
+      if (filteredInfo[key] && filteredInfo[key].length > 0) newFilters[key] = filteredInfo[key]
     });
     const keys = Object.keys(newFilters);
     if (keys.length === 0) return tableData.map(item => item);
@@ -130,7 +135,7 @@ class DowTable extends Component {
     this.props.onTableChange && this.props.onTableChange(this)
   };
   tableChanged = (pagination, filters, sorter) => {
-    this.setState({ pagination, filters, sorter }, this.onTableChange);
+    this.setState({ pagination, filteredInfo: filters, sorter }, this.onTableChange);
   }
   render() {
     const { columns, buttons, dataSource, pagination } = this.props;
