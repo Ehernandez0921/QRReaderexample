@@ -89,10 +89,10 @@ class HorizontalLoginForm extends Component {
       <Form onSubmit={this.handleSubmit}>
         {fields && fields.map((field, fieldIndex) => {
           const { title, name } = field;
-          switch (this.props.containterType) {
+          switch (this.props.containerType) {
             case "popover":
               return (
-                <Col sm={24} key={`${name}input${fieldIndex}`}>
+                <Col style={field.style} sm={24} key={`${name}input${fieldIndex}`}>
                   <FormItem {...formItemLayout} label={`${title}`} >
                     {this.fieldItem(field, fieldIndex)}
                   </FormItem>
@@ -100,7 +100,7 @@ class HorizontalLoginForm extends Component {
               )
             default:
               return (
-                <Col lg={8} md={12} sm={24} xs={24} {...this.props} key={`${name}input${fieldIndex}`}>
+                <Col style={field.style} lg={8} md={12} sm={24} xs={24} key={`${name}input${fieldIndex}`}>
                   <FormItem {...formItemLayout} label={`${title}`} >
                     {this.fieldItem(field, fieldIndex)}
                   </FormItem>
