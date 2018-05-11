@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Provider from './Provider';
-
+import { Popover, Row } from "antd";
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
@@ -56,3 +56,5 @@ storiesOf('ExportToExcel', module)
       ]
     })
   }>test</Button>)
+storiesOf('popOver', module)
+  .add('simple', () => <Popover content={<Row><DowDetails {...detailsProps} containerType='popover' /></Row>}><Button>tst</Button></Popover>)
