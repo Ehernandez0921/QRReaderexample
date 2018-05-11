@@ -33,3 +33,4 @@ export const formatHeaders = (collection, headers) => {
   })));
   return newCollection
 }
+export default { exportToFile }
