@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { debounce, chain, } from 'lodash';
+import { debounce, chain, isEqual } from 'lodash';
 import { Table, Input, Row, Col } from 'antd';
 import DowButton from './DowTableButton'
 // const rowSelection = {
@@ -25,6 +25,9 @@ class DowTable extends Component {
       sorter: {}
     }
     this.searchColumn = debounce(this.searchColumn, 300);
+  }
+  componentWillReceiveProps = (nextProps) => {
+    if (!isEqual(this.props.dataSource, nextProps.dataSource)) this.setState({ searchFilters: [], searchText: '', filters: {} })
   }
   onButtonClick = (buttonEvent, button) => button.onClick && button.onClick(buttonEvent, this);
 
