@@ -14,6 +14,8 @@ import {
   tableButtons
 } from './settingFiles/tableSettings'
 import detailsProps from './settingFiles/detailsSettings'
+import { exportToFile } from '../Utils/exportUtils';
+
 import 'antd/dist/antd.css';
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
@@ -44,3 +46,13 @@ storiesOf('DowTable', module)
   });
 storiesOf('DowDetails', module)
   .add('simple', () => <DowDetails {...detailsProps}></DowDetails>)
+
+storiesOf('ExportToExcel', module)
+  .add('simple', () => <Button onClick={() =>
+    exportToFile(data, {
+      headers: [
+        { key: "strSapResponse", name: 'test' },
+        { key: "strErrSucc" },
+      ]
+    })
+  }>test</Button>)
