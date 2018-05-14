@@ -38,7 +38,6 @@ class App extends Component {
       appName: AppConsts.appName,
       setSearchValue: this.props.setSearchValue,
     }
-    console.log(this.props, 'App.js 41 ');
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <DowDrawer {...drawerProps} />

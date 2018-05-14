@@ -1,4 +1,15 @@
-import moment from 'moment'
+import moment from 'moment';
+import { FormActions } from '../../Store/UiState/UiActions';
+export const mapTableStateToProps = (state) => {
+  return state;
+};
+export const mapTableDispatchToProps = (dispatch) => {
+  return {
+    formActions: {
+      validateFields: isValid => dispatch(FormActions.validateFields(isValid)),
+    }
+  };
+};
 export default {
 
   fields: [
@@ -6,13 +17,15 @@ export default {
       title: 'Test Field',
       name: 'name',
       fieldType: 'input',
-      disabled: true,
       rules: [
         {
           required: true,
           message: 'Please input your name',
+        },
+        {
+          message: 'Wrong Length',
           min: 5,
-          max: 50
+          max: 7
         }
       ]
     },

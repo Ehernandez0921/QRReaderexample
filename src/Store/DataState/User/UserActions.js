@@ -3,7 +3,6 @@ import userConsts from './UserConsts';
 export const fetchMe = () => (dispatch, getState) => {
   fetchUser()
     .then(response => {
-      console.log(response, 'UserActions.js 6 ');
       if (!response.ok) dispatch(errorLoadingUser(response.statusText));
       return response.json();
     })

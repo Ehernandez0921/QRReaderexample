@@ -5,9 +5,9 @@ import moment from 'moment';
 const FormItem = Form.Item;
 const { Option } = Select;
 const { TextArea } = Input;
-// function hasErrors(fieldsError) {
-//   return Object.keys(fieldsError).some(field => fieldsError[field]);
-// }
+function hasErrors(fieldsError) {
+  return Object.keys(fieldsError).some(field => fieldsError[field]);
+}
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -23,6 +23,17 @@ const formItemLayout = {
   },
 };
 class HorizontalLoginForm extends Component {
+  componentDidMount = () => {
+    this.validateFields();
+    if (this.props.validateOnInit) {
+      this.validateFields();
+    };
+  }
+  validateFields = () => {
+    const { getFieldsError } = this.props.form;
+    this.props.form.validateFields();
+    this.props.validateFields && this.props.validateFields(!hasErrors(getFieldsError()));
+  }
   fieldItem = (field, fieldIndex) => {
     let customProps = {};
     const {
@@ -77,14 +88,14 @@ class HorizontalLoginForm extends Component {
   render() {
     const {
       fields,
-      // form 
+      form
     } = this.props;
-    // const {
-    //   getFieldDecorator,
-    //   getFieldsError,
-    //   getFieldError,
-    //   isFieldTouched
-    // } = form;
+    const {
+      //   getFieldDecorator,
+      getFieldsError,
+      //   getFieldError,
+      //   isFieldTouched
+    } = form;
     return (
       <Form onSubmit={this.handleSubmit}>
         {fields && fields.map((field, fieldIndex) => {
@@ -143,6 +154,5 @@ export default Form.create({
     return tmpProps;
   },
   onValuesChange(_, values) {
-    console.log(_, values, 'DowDetails.js 125 ');
   },
 })(HorizontalLoginForm);
