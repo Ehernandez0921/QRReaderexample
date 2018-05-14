@@ -17,7 +17,7 @@ class Authenticator extends Component {
   render() {
     const { WrappedComponent, authentication, allowedRoles, ...restOfProps } = this.props;
     if (authentication && !this.isAuthenticated()) return <div>Couldn't authenticate</div>
-    if (allowedRoles && !this.isAuthorized) return <div>Couldnt authorize</div>
+    if (allowedRoles && !this.isAuthorized()) return <div>Couldnt authorize</div>
     return <WrappedComponent {...restOfProps} />
   }
 }
