@@ -12,12 +12,12 @@ class Authenticator extends Component {
     return currentUser.roles.some(role => allowedRoles.includes(role));
   }
   isAuthenticated = () => {
-    return this.props.users.currentUser ? true : false;
+    return this.props.users.currentUser && this.props.users.currentUser.UserId !== '' ? true : false;
   }
   render() {
-    const { WrappedComponent, authenticated, allowedRoles, ...restOfProps } = this.props;
-    if (this.authentication && !this.isAuthenticated()) return <div>Couldn't authenticate</div>
-    if (this.allowedRoles && !this.isAuthorized) return <div>Couldnt authorize</div>
+    const { WrappedComponent, authentication, allowedRoles, ...restOfProps } = this.props;
+    if (authentication && !this.isAuthenticated()) return <div>Couldn't authenticate</div>
+    if (allowedRoles && !this.isAuthorized) return <div>Couldnt authorize</div>
     return <WrappedComponent {...restOfProps} />
   }
 }
