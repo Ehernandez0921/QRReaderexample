@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { debounce, chain, isEqual, orderBy } from 'lodash';
+import { debounce, chain, isEqual, orderBy, isEmpty } from 'lodash';
 import { Table, Input, Row, Col } from 'antd';
 import DowButton from './DowTableButton'
 // const rowSelection = {
@@ -28,7 +28,11 @@ class DowTable extends Component {
     this.searchColumn = debounce(this.searchColumn, 300);
   }
   componentWillReceiveProps = (nextProps) => {
-    if (!isEqual(this.props.dataSource, nextProps.dataSource)) this.setState({ searchFilters: [], searchText: '', filteredInfo: null })
+    const { setFilteredRecords } = this.props;
+    if (!isEqual(this.props.dataSource, nextProps.dataSource))
+      this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
+        setFilteredRecords && setFilteredRecords([])
+      )
   }
   onButtonClick = (buttonEvent, button) => button.onClick && button.onClick(buttonEvent, this);
 
@@ -108,15 +112,19 @@ class DowTable extends Component {
     });
     return tmpArray;
   }
-  defaultFilterData = (tableData) => {
-    if (!tableData) tableData = this.fullFilter(this.props.dataSource);
-    let tmpData = tableData.slice(0)
+  filteredInfoObject = () => {
     let { filteredInfo } = this.state;
     filteredInfo = filteredInfo || {};
     const newFilters = {};
     Object.keys(filteredInfo).forEach(key => {
       if (filteredInfo[key] && filteredInfo[key].length > 0) newFilters[key] = filteredInfo[key]
     });
+    return newFilters
+  }
+  defaultFilterData = (tableData) => {
+    if (!tableData) tableData = this.fullFilter(this.props.dataSource);
+    let tmpData = tableData.slice(0)
+    const newFilters = this.filteredInfoObject();
     const keys = Object.keys(newFilters);
     if (keys.length === 0) return tableData.map(item => item);
     keys.forEach(key => {
@@ -131,7 +139,15 @@ class DowTable extends Component {
   }
   onTableChange = () => {
     const { setFilteredRecords, dataSource } = this.props;
-    setFilteredRecords && setFilteredRecords(this.fullFilter(dataSource))
+    const filters = this.filteredInfoObject();
+    if (setFilteredRecords) {
+      if (this.state.searchFilters.length === 0 && isEmpty(filters)) {
+        setFilteredRecords([]);
+      } else {
+        setFilteredRecords(this.fullFilter(dataSource));
+      }
+
+    }
     this.props.onTableChange && this.props.onTableChange(this)
   };
   tableChanged = (pagination, filters, sorter) => {
