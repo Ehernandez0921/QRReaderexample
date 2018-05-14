@@ -24,7 +24,6 @@ const formItemLayout = {
 };
 class HorizontalLoginForm extends Component {
   componentDidMount = () => {
-    this.validateFields();
     if (this.props.validateOnInit) {
       this.validateFields();
     };
@@ -96,6 +95,7 @@ class HorizontalLoginForm extends Component {
       //   getFieldError,
       //   isFieldTouched
     } = form;
+    console.log('DowDetails.js 99 ');
     return (
       <Form onSubmit={this.handleSubmit}>
         {fields && fields.map((field, fieldIndex) => {
@@ -128,10 +128,24 @@ class HorizontalLoginForm extends Component {
 
 export default Form.create({
   onFieldsChange(props, changedFields) {
-    props.onChange && props.onChange(changedFields);
+    const changedModel = {
+      ...props.model,
+      ...Object.keys(changedFields)
+        .map(key => {
+          return {
+            [key]: changedFields[key].value
+          }
+        })
+        .reduce((accumulator, currentValue) => {
+          for (let key in currentValue) accumulator[key] = currentValue[key];
+          return accumulator
+        }, {})
+    }
+    props.onChange && props.onChange(changedFields, changedModel);
   },
   mapPropsToFields(props) {
-    const { model, fields } = props;
+    const { model, fields, changedModel = {} } = props;
+    console.log(changedModel, 'DowDetails.js 149 ');
     const tmpProps = {};
     let value;
     Object.keys(model).forEach((key, index) => {
@@ -148,6 +162,7 @@ export default Form.create({
         value = model[key]
       }
       tmpProps[key] = Form.createFormField({
+        ...changedModel[key],
         value
       })
     })
