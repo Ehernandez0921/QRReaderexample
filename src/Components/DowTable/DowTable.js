@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { debounce, chain, isEqual } from 'lodash';
+import { debounce, chain, isEqual, orderBy } from 'lodash';
 import { Table, Input, Row, Col } from 'antd';
 import DowButton from './DowTableButton'
 // const rowSelection = {
@@ -57,10 +57,10 @@ class DowTable extends Component {
       return {
         ...column,
         filters: columnFilter.length < 100 ?
-          columnFilter.map(item => ({
+          orderBy(columnFilter.map(item => ({
             text: item || 'Blank',
             value: item || 'BLANK'
-          }))
+          })), 'text')
           : undefined,
         filteredValue: filteredInfo[column.dataIndex] || null,
         onFilter: (value, record) => {
