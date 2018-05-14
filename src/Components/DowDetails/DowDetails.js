@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Input, Col, DatePicker, Select } from 'antd';
+import { Form, Input, Col, DatePicker, Select, Row, Button } from 'antd';
 // import DowField from './DowField';
 import moment from 'moment';
 const FormItem = Form.Item;
@@ -38,6 +38,18 @@ class HorizontalLoginForm extends Component {
     const { getFieldsError } = this.props.form;
     this.props.form.validateFields();
     this.props.validateFields && this.props.validateFields(!hasErrors(getFieldsError()));
+  }
+  onOkClick = (e) => {
+    this.props.form.validateFields((err, values) => {
+      if (err && this.props.validateForm) return false;
+      if (!err && this.props.validateForm) {
+        return this.props.onOkClick && this.props.onOkClick(e)
+      }
+      this.props.onOkClick && this.props.onOkClick(e);
+    });
+  }
+  onCancelClick = (e) => {
+    this.props.onCancel && this.props.onCancel(e)
   }
   fieldItem = (field, fieldIndex) => {
     let customProps = {};
@@ -102,29 +114,45 @@ class HorizontalLoginForm extends Component {
       //   isFieldTouched
     } = form;
     return (
-      <Form onSubmit={this.handleSubmit}>
-        {fields && fields.map((field, fieldIndex) => {
-          const { title, name } = field;
-          switch (this.props.containerType) {
-            case "popover":
-              return (
-                <Col style={field.style} sm={24} key={`${name}input${fieldIndex}`}>
-                  <FormItem {...formItemLayout} label={`${title}`} >
-                    {this.fieldItem(field, fieldIndex)}
-                  </FormItem>
-                </Col>
-              )
-            default:
-              return (
-                <Col style={field.style} lg={8} md={12} sm={24} xs={24} key={`${name}input${fieldIndex}`}>
-                  <FormItem {...formItemLayout} label={`${title}`} >
-                    {this.fieldItem(field, fieldIndex)}
-                  </FormItem>
-                </Col>
-              )
-          }
+      <Form >
+        <Row>
+          {fields && fields.map((field, fieldIndex) => {
+            const { title, name } = field;
+            switch (this.props.containerType) {
+              case "popover":
+                return (
+                  <Col style={field.style} sm={24} key={`${name}input${fieldIndex}`}>
+                    <FormItem {...formItemLayout} label={`${title}`} >
+                      {this.fieldItem(field, fieldIndex)}
+                    </FormItem>
+                  </Col>
+                )
+              default:
+                return (
+                  <Col style={field.style} lg={8} md={12} sm={24} xs={24} key={`${name}input${fieldIndex}`}>
+                    <FormItem {...formItemLayout} label={`${title}`} >
+                      {this.fieldItem(field, fieldIndex)}
+                    </FormItem>
+                  </Col>
+                )
+            }
 
-        })}
+          })}
+        </Row>
+        <Row>
+          <Button style={{
+            float: 'right',
+            fontWeight: 400,
+            marginRight: 10,
+            marginLeft: 10
+          }} onClick={this.onOkClick}>Ok</Button>
+          <Button style={{
+            float: 'right',
+            fontWeight: 400,
+            marginRight: 10,
+            marginLeft: 10
+          }} onClick={this.props.onCancelClick}>Cancel</Button>
+        </Row>
         {this.props.children}
       </Form>
     );
