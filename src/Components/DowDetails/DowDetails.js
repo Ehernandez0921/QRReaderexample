@@ -22,6 +22,12 @@ const formItemLayout = {
     lg: { span: 17 }
   },
 };
+/**
+ * Form for details 
+ * @param {array<object>} fields 'field settings to show
+ * @param {object} model model that has all the settings
+ * @param {object} changedModel model that holds all the fields and configuration of the changes
+ */
 class HorizontalLoginForm extends Component {
   componentDidMount = () => {
     if (this.props.validateOnInit) {
@@ -95,7 +101,6 @@ class HorizontalLoginForm extends Component {
       //   getFieldError,
       //   isFieldTouched
     } = form;
-    console.log('DowDetails.js 99 ');
     return (
       <Form onSubmit={this.handleSubmit}>
         {fields && fields.map((field, fieldIndex) => {
@@ -145,7 +150,6 @@ export default Form.create({
   },
   mapPropsToFields(props) {
     const { model, fields, changedModel = {} } = props;
-    console.log(changedModel, 'DowDetails.js 149 ');
     const tmpProps = {};
     let value;
     Object.keys(model).forEach((key, index) => {
