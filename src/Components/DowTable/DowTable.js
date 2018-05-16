@@ -165,6 +165,7 @@ class DowTable extends Component {
       }
     return (
       <div>
+        {this.props.tableHeader && <Row style={{ textAlign: 'center' }}><h3>{this.props.tableHeader}</h3></Row>}
         {buttons && buttons.map((button) =>
           <DowButton {...button} key={`tableButton${button.name}`} onButtonClick={this.onButtonClick} />
         )}

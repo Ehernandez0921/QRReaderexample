@@ -35,6 +35,7 @@ storiesOf('DowTable', module)
   .addDecorator(story => <Provider story={story()} />)
   .add('test', (props) => {
     return <ConnectedTable
+      tableHeader={'Testing the Header'}
       dataSource={data}
       columns={columns}
       buttons={tableButtons}
