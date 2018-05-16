@@ -115,6 +115,56 @@ class HorizontalLoginForm extends Component {
     } = form;
     return (
       <Form >
+        {this.props.buttonTop && <Row>
+          {!this.props.buttons &&
+            <Row>
+              <Button style={{
+                float: 'right',
+                borderTop: 0,
+                borderLeft: 0,
+                borderRight: 0,
+                borderRadius: 0,
+                fontWeight: 400,
+                marginTop: 10,
+                marginRight: 10,
+                marginLeft: 10
+              }} onClick={this.onOkClick}>Ok</Button>
+              <Button style={{
+                float: 'right',
+                borderTop: 0,
+                borderLeft: 0,
+                borderRight: 0,
+                borderRadius: 0,
+                fontWeight: 400,
+                marginTop: 10,
+                marginRight: 10,
+                marginLeft: 10
+              }} onClick={this.props.onCancelClick}>Cancel</Button>
+            </Row>
+          }
+          {this.props.buttons &&
+            <Row>
+              {this.props.buttons.map((button, index) =>
+                <Button
+                  {...button}
+                  key={`tableButton${index}`}
+                  style={{
+                    float: 'right',
+                    borderTop: 0,
+                    borderLeft: 0,
+                    borderRight: 0,
+                    borderRadius: 0,
+                    fontWeight: 400,
+                    marginTop: 10,
+                    marginRight: 10,
+                    marginLeft: 10
+                  }}
+                  onClick={button.onClick}
+                >{button.title}</Button>
+              )}
+            </Row>
+          }
+        </Row>}
         <Row>
           {fields && fields.map((field, fieldIndex) => {
             const { title, name } = field;
@@ -139,20 +189,51 @@ class HorizontalLoginForm extends Component {
 
           })}
         </Row>
-        <Row>
-          <Button style={{
-            float: 'right',
-            fontWeight: 400,
-            marginRight: 10,
-            marginLeft: 10
-          }} onClick={this.onOkClick}>Ok</Button>
-          <Button style={{
-            float: 'right',
-            fontWeight: 400,
-            marginRight: 10,
-            marginLeft: 10
-          }} onClick={this.props.onCancelClick}>Cancel</Button>
-        </Row>
+        {!this.props.buttonTop && <Row>
+          {!this.props.buttons &&
+            <Row>
+              <Button style={{
+                float: 'right',
+                borderTop: 0,
+                borderLeft: 0,
+                borderRight: 0,
+                borderRadius: 0,
+                fontWeight: 400,
+                marginTop: 10,
+                marginRight: 10,
+                marginLeft: 10
+              }} onClick={this.onOkClick}>Ok</Button>
+              <Button style={{
+                float: 'right',
+                borderTop: 0,
+                borderLeft: 0,
+                borderRight: 0,
+                borderRadius: 0,
+                fontWeight: 400,
+                marginTop: 10,
+                marginRight: 10,
+                marginLeft: 10
+              }} onClick={this.props.onCancelClick}>Cancel</Button>
+            </Row>
+          }
+          {this.props.buttons &&
+            <Row>
+              {this.props.buttons.map((button, index) =>
+                <Button
+                  {...button}
+                  key={`tableButton${index}`}
+                  style={{
+                    float: 'right',
+                    fontWeight: 400,
+                    marginRight: 10,
+                    marginLeft: 10
+                  }}
+                  onClick={button.onClick}
+                >{button.title}</Button>
+              )}
+            </Row>
+          }
+        </Row>}
         {this.props.children}
       </Form>
     );

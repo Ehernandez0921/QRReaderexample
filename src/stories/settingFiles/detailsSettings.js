@@ -68,5 +68,10 @@ export default {
     name: 'Eddy Hernandez',
     birthDay: '01/01/2015',
     department: 'test3'
-  }
+  },
+  buttons: [
+    { name: 'test1', title: 'Test 1', onClick: () => { console.log('detailsSettings.js 73 '); } },
+    { name: 'test2', title: 'Test 2', onClick: () => { console.log('detailsSettings.js 74 '); } },
+  ],
+  buttonTop: true
 }
