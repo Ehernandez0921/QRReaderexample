@@ -32,6 +32,10 @@ class DowTable extends Component {
     if (nextProps.dataSource.length > 0 && this.fullFilter(nextProps.dataSource).length === 0) this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
       setFilteredRecords && setFilteredRecords([])
     )
+    // if (!isEqual(this.props.dataSource, nextProps.dataSource))
+    //   this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
+    //     setFilteredRecords && setFilteredRecords([])
+    //   )
   }
   onButtonClick = (buttonEvent, button) => button.onClick && button.onClick(buttonEvent, this);
 
@@ -166,7 +170,8 @@ class DowTable extends Component {
         showSizeChanger: true,
         showQuickJumper: true,
         pageSizeOptions: ['10', '25', '50', '100', tableData.length.toString()]
-      }
+      };
+    console.log(this.props, 'DowTable.js 170 ');
     return (
       <div>
         {this.props.tableHeader && <Row style={{ textAlign: 'center' }}><h3>{this.props.tableHeader}</h3></Row>}
