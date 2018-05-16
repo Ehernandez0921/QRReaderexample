@@ -29,10 +29,10 @@ class DowTable extends Component {
   }
   componentWillReceiveProps = (nextProps) => {
     const { setFilteredRecords } = this.props;
-    if (!isEqual(this.props.dataSource, nextProps.dataSource))
-      this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
-        setFilteredRecords && setFilteredRecords([])
-      )
+    // if (!isEqual(this.props.dataSource, nextProps.dataSource))
+    //   this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
+    //     setFilteredRecords && setFilteredRecords([])
+    //   )
   }
   onButtonClick = (buttonEvent, button) => button.onClick && button.onClick(buttonEvent, this);
 
