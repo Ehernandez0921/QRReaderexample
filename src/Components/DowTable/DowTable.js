@@ -74,7 +74,12 @@ class DowTable extends Component {
             record[column.dataIndex] == value;
           /* eslint-enable */
         },
-        title: <div style={{ textAlign: 'center' }} key={`${column.dataIndex}headerColumn`}>
+        title: <div
+          style={{
+            textAlign: 'center',
+            color: filteredInfo[column.dataIndex] && filteredInfo[column.dataIndex].length > 0 ? 'blue' : ''
+          }}
+          key={`${column.dataIndex}headerColumn`}>
           {column.title}
           <Input
             ref={ele => this.searchInput = ele}
