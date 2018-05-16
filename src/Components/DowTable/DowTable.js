@@ -60,15 +60,24 @@ class DowTable extends Component {
         .map(item => item[column.dataIndex])
         .uniq()
         .value();
-
+      const searchFilter = this.state.searchFilters.find(item => item && item.id === column.dataIndex);
+      const subFilter = searchFilter ?
+        columnFilter
+          .filter(item => item && item.toString().includes(searchFilter.searchValue)) :
+        columnFilter.slice(0, 25);
       return {
         ...column,
-        filters: columnFilter.length < 100 ?
-          orderBy(columnFilter.map(item => ({
-            text: item || 'Blank',
-            value: item || 'BLANK'
-          })), 'text')
-          : undefined,
+        filters:
+          columnFilter.length < 100 ?
+            orderBy(columnFilter.map(item => ({
+              text: item || 'Blank',
+              value: item || 'BLANK'
+            })), 'text')
+            : orderBy(subFilter
+              .map(item => ({
+                text: item || 'Blank',
+                value: item || 'BLANK'
+              })), 'text'),
         filteredValue: filteredInfo[column.dataIndex] || null,
         onFilter: (value, record) => {
           /* eslint-disable */
