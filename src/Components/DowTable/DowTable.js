@@ -25,17 +25,13 @@ class DowTable extends Component {
       sorter: {},
       filteredInfo: null
     }
-    this.searchColumn = debounce(this.searchColumn, 300);
+    this.searchColumn = debounce(this.searchColumn, 600);
   }
   componentWillReceiveProps = (nextProps) => {
     const { setFilteredRecords } = this.props;
     if (nextProps.dataSource.length > 0 && this.fullFilter(nextProps.dataSource).length === 0) this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
       setFilteredRecords && setFilteredRecords([])
     )
-    // if (!isEqual(this.props.dataSource, nextProps.dataSource))
-    //   this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
-    //     setFilteredRecords && setFilteredRecords([])
-    //   )
   }
   onButtonClick = (buttonEvent, button) => button.onClick && button.onClick(buttonEvent, this);
 
