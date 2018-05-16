@@ -29,7 +29,7 @@ class DowTable extends Component {
   }
   componentWillReceiveProps = (nextProps) => {
     const { setFilteredRecords } = this.props;
-    if (nextProp.dataSource.length > 0 && this.fullFilter(nextProp.dataSource).length === 0) this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
+    if (nextProps.dataSource.length > 0 && this.fullFilter(nextProps.dataSource).length === 0) this.setState({ searchFilters: [], searchText: '', filteredInfo: null }, () =>
       setFilteredRecords && setFilteredRecords([])
     )
     // if (!isEqual(this.props.dataSource, nextProps.dataSource))
