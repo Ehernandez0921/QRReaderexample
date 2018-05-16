@@ -179,7 +179,7 @@ class DowTable extends Component {
       {
         showSizeChanger: true,
         showQuickJumper: true,
-        pageSizeOptions: ['10', '25', '50', '100', tableData.length.toString()]
+        pageSizeOptions: ['10', '25', '50', '100', tableData.length > 1500 ? 1500 : tableData.length.toString()]
       };
     return (
       <div>
