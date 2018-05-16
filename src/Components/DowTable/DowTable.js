@@ -66,7 +66,7 @@ class DowTable extends Component {
           .filter(item => item && item.toString().includes(searchFilter.searchValue)) :
         columnFilter.slice(0, 25);
       return {
-        ...column,
+
         filters:
           columnFilter.length < 100 ?
             orderBy(columnFilter.map(item => ({
@@ -105,7 +105,8 @@ class DowTable extends Component {
         sorter: (a, b) => a[column.dataIndex] - b[column.dataIndex],
         onFilterDropdownVisibleChange: (visible, ) => {
           setTimeout(() => this.searchInput && this.searchInput.focus(), 50);
-        }
+        },
+        ...column,
       }
     });
     return filteredColumns
@@ -180,7 +181,6 @@ class DowTable extends Component {
         showQuickJumper: true,
         pageSizeOptions: ['10', '25', '50', '100', tableData.length.toString()]
       };
-    console.log(this.props, 'DowTable.js 170 ');
     return (
       <div>
         {this.props.tableHeader && <Row style={{ textAlign: 'center' }}><h3>{this.props.tableHeader}</h3></Row>}
