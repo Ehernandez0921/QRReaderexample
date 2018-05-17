@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Input, Col, DatePicker, Select, Row, Button } from 'antd';
+import { Form, Input, Col, DatePicker, Select, Row } from 'antd';
+import DowTableButton from '../DowTable/DowTableButton'
 // import DowField from './DowField';
 import moment from 'moment';
 const FormItem = Form.Item;
@@ -118,7 +119,7 @@ class HorizontalLoginForm extends Component {
         {this.props.buttonTop && <Row>
           {!this.props.buttons &&
             <Row>
-              <Button style={{
+              <DowTableButton style={{
                 float: 'right',
                 borderTop: 0,
                 borderLeft: 0,
@@ -128,8 +129,8 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.onOkClick}>Ok</Button>
-              <Button style={{
+              }} onClick={this.onOkClick}>Ok</DowTableButton>
+              <DowTableButton style={{
                 float: 'right',
                 borderTop: 0,
                 borderLeft: 0,
@@ -139,13 +140,13 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.props.onCancelClick}>Cancel</Button>
+              }} onClick={this.props.onCancelClick}>Cancel</DowTableButton>
             </Row>
           }
           {this.props.buttons &&
             <Row>
               {this.props.buttons.map((button, index) =>
-                <Button
+                <DowTableButton
                   {...button}
                   key={`tableButton${index}`}
                   style={{
@@ -160,7 +161,7 @@ class HorizontalLoginForm extends Component {
                     marginLeft: 10
                   }}
                   onClick={button.onClick}
-                >{button.title}</Button>
+                >{button.title}</DowTableButton>
               )}
             </Row>
           }
@@ -192,7 +193,7 @@ class HorizontalLoginForm extends Component {
         {!this.props.buttonTop && <Row>
           {!this.props.buttons &&
             <Row>
-              <Button style={{
+              <DowTableButton style={{
                 float: 'right',
                 borderTop: 0,
                 borderLeft: 0,
@@ -202,8 +203,8 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.onOkClick}>Ok</Button>
-              <Button style={{
+              }} onClick={this.onOkClick}>Ok</DowTableButton>
+              <DowTableButton style={{
                 float: 'right',
                 borderTop: 0,
                 borderLeft: 0,
@@ -213,13 +214,13 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.props.onCancelClick}>Cancel</Button>
+              }} onClick={this.props.onCancelClick}>Cancel</DowTableButton>
             </Row>
           }
           {this.props.buttons &&
             <Row>
               {this.props.buttons.map((button, index) =>
-                <Button
+                <DowTableButton
                   {...button}
                   key={`tableButton${index}`}
                   style={{
@@ -229,7 +230,7 @@ class HorizontalLoginForm extends Component {
                     marginLeft: 10
                   }}
                   onClick={button.onClick}
-                >{button.title}</Button>
+                >{button.title}</DowTableButton>
               )}
             </Row>
           }
