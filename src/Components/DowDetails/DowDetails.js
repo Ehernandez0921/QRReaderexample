@@ -114,6 +114,7 @@ class HorizontalLoginForm extends Component {
       //   getFieldError,
       //   isFieldTouched
     } = form;
+    console.log(this.props, 'DowDetails.js 117 ');
     return (
       <Form >
         {this.props.buttonTop && <Row>
@@ -129,7 +130,7 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.onOkClick}>Ok</DowTableButton>
+              }} onButtonClick={this.onOkClick}>Ok</DowTableButton>
               <DowTableButton style={{
                 float: 'right',
                 borderTop: 0,
@@ -140,7 +141,7 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.props.onCancelClick}>Cancel</DowTableButton>
+              }} onButtonClick={this.props.onCancelClick}>Cancel</DowTableButton>
             </Row>
           }
           {this.props.buttons &&
@@ -160,7 +161,7 @@ class HorizontalLoginForm extends Component {
                     marginRight: 10,
                     marginLeft: 10
                   }}
-                  onClick={button.onClick}
+                  onButtonClick={button.onClick}
                 >{button.title}</DowTableButton>
               )}
             </Row>
@@ -203,7 +204,7 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.onOkClick}>Ok</DowTableButton>
+              }} onButtonClick={this.onOkClick}>Ok</DowTableButton>
               <DowTableButton style={{
                 float: 'right',
                 borderTop: 0,
@@ -214,7 +215,7 @@ class HorizontalLoginForm extends Component {
                 marginTop: 10,
                 marginRight: 10,
                 marginLeft: 10
-              }} onClick={this.props.onCancelClick}>Cancel</DowTableButton>
+              }} onButtonClick={this.props.onCancelClick}>Cancel</DowTableButton>
             </Row>
           }
           {this.props.buttons &&
@@ -229,7 +230,7 @@ class HorizontalLoginForm extends Component {
                     marginRight: 10,
                     marginLeft: 10
                   }}
-                  onClick={button.onClick}
+                  onButtonClick={button.onClick}
                 >{button.title}</DowTableButton>
               )}
             </Row>

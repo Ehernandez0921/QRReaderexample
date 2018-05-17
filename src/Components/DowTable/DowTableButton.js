@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button } from "antd";
 class DowTableButtons extends Component {
   onButtonClick = (e) => {
-    this.props.onClick && this.props.onButtonClick(e, this.props)
+    this.props.onButtonClick && this.props.onButtonClick(e, this.props)
   }
   render() {
     const { title, name, onButtonClick, parent, ...restOfProps } = this.props;
@@ -20,7 +20,7 @@ class DowTableButtons extends Component {
         }}
           {...restOfProps}
           onClick={this.onButtonClick}
-        >{title}</Button>)
+        >{title || this.props.children}</Button>)
     } else {
       const Parent = parent.Component;
       return (
@@ -37,7 +37,7 @@ class DowTableButtons extends Component {
           }}
             {...restOfProps}
             onClick={this.onButtonClick}
-          >{title}</Button>
+          >{title || this.props.children}</Button>
         </Parent>)
     }
   }
