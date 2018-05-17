@@ -114,7 +114,6 @@ class HorizontalLoginForm extends Component {
       //   getFieldError,
       //   isFieldTouched
     } = form;
-    console.log(this.props, 'DowDetails.js 117 ');
     return (
       <Form >
         {this.props.buttonTop && <Row>
