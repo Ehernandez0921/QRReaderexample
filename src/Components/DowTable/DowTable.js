@@ -55,7 +55,7 @@ class DowTable extends Component {
     filteredInfo = filteredInfo || {};
     if (columns.length > 0 && columns[0].filter) return columns;
     const filteredColumns = columns.map((column, index) => {
-      // const tmpColumn = column;
+      const { title, ...noTitleColumn } = column;
       const columnFilter = chain(this.fullFilter(this.props.dataSource))
         .map(item => item[column.dataIndex])
         .uniq()
@@ -66,7 +66,6 @@ class DowTable extends Component {
           .filter(item => item && item.toString().includes(searchFilter.searchValue)) :
         columnFilter.slice(0, 25);
       return {
-
         filters:
           columnFilter.length < 100 ?
             orderBy(columnFilter.map(item => ({
@@ -86,7 +85,7 @@ class DowTable extends Component {
             record[column.dataIndex] == value;
           /* eslint-enable */
         },
-        title: <div
+        title: (<span
           style={{
             textAlign: 'center',
             color: filteredInfo[column.dataIndex] && filteredInfo[column.dataIndex].length > 0 ? 'blue' : ''
@@ -100,13 +99,14 @@ class DowTable extends Component {
             value={this.state.searchText[column.dataIndex]}
             onChange={this.onInputChange}
             onPressEnter={this.onSearch}
-          /></div>,
+          />
+        </span>),
         defaultSortOrder: 'ascend',
         sorter: (a, b) => a[column.dataIndex] - b[column.dataIndex],
         onFilterDropdownVisibleChange: (visible, ) => {
           setTimeout(() => this.searchInput && this.searchInput.focus(), 50);
         },
-        ...column,
+        ...noTitleColumn,
       }
     });
     return filteredColumns
