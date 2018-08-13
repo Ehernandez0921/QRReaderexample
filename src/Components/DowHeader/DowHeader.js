@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import dowDiamond from './dowDiamond.png';
 import {
   Layout,
   Button,
@@ -21,7 +22,7 @@ export default class DowHeader extends Component {
     return (
       <Header style={{ padding: 0 }}>
         <Row>
-          <Col
+          {props.toggleDrawer && <Col
             onClick={props.toggleDrawer}
             xs={3} sm={2} md={2} lg={1} xl={1}
             style={{ 'textAlign': 'center' }}
@@ -32,12 +33,12 @@ export default class DowHeader extends Component {
               size={'large'}
               style={{ 'borderStyle': 'none' }}
             />
-          </Col>
+          </Col>}
           <Col
-            xs={0} sm={5} md={4} lg={2} xl={2}
+            xs={0} sm={0} md={7} lg={6} xl={4}
             style={{ 'textAlign': 'center' }}
           >
-            Logo goes here
+            <img src={dowDiamond} alt="Dow" />
           </Col>
           <Col
             xs={12} sm={8} md={6} lg={6} xl={4}

@@ -7,7 +7,7 @@ import DowHeader from '../DowHeader/DowHeader';
 import DowDrawer from '../DowDrawer/DowDrawer';
 import Breadcrumb from '../BreadCrumb/BreadCrumb'
 import AppConsts from '../../Store/DataState/App/AppConsts';
-import Routes from '../../Routes/Routes'
+import Routes from '../../Routes/Routes';
 const { Content } = Layout;
 
 class App extends Component {
