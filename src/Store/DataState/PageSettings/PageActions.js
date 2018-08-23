@@ -1,8 +1,11 @@
 import pageConsts from './PageConsts';
 import { DrawerActions } from '../../UiState/UiActions';
+import {isEqual} from 'lodash';
 export const setPageSettings = (pageSettings) => {
   return (dispatch, getState) => {
-    dispatch(DrawerActions.updateMenuItems(pageSettings.menuItems || []));
+    if(!isEqual(getState().drawer.menuItems,pageSettings.menuItems)){
+      dispatch(DrawerActions.updateMenuItems(pageSettings.menuItems || []));
+    }
     dispatch(updatePageSettings(pageSettings));
   }
 }
