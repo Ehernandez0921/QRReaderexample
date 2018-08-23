@@ -5,8 +5,8 @@ export const setPageSettings = (pageSettings) => {
   return (dispatch, getState) => {
     if(!isEqual(getState().drawer.menuItems,pageSettings.menuItems)){
       dispatch(DrawerActions.updateMenuItems(pageSettings.menuItems || []));
-    }
-    dispatch(updatePageSettings(pageSettings));
+      dispatch(updatePageSettings(pageSettings));
+    } 
   }
 }
 export const updatePageSettings = (pageSettings) => {
