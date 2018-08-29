@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { debounce, chain, isEqual, orderBy, isEmpty } from 'lodash';
+import { debounce, chain,orderBy, isEmpty } from 'lodash';
 import { Table, Input, Row, Col } from 'antd';
 import DowButton from './DowTableButton'
 // const rowSelection = {
