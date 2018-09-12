@@ -14,7 +14,7 @@ export default class DowDrawer extends Component {
         breakpoint="lg"
         defaultCollapsed={this.props.show}
       >
-        <Menu theme="dark" mode="inline" >
+        <Menu mode="inline" >
           {this.props.menuItems && this.props.menuItems.map((item, itemIndex) => {
             if (!item.menuItems) {
               return (
