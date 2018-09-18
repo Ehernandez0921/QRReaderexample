@@ -1,0 +1,6 @@
+export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
+export const SET_DRAWER_MODEL="SET_DRAWER_MODEL"
+export default {
+  TOGGLE_DRAWER,
+  SET_DRAWER_MODEL
+}
