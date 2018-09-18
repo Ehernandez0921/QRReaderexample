@@ -6,6 +6,8 @@ const UserReducer = (state = userModel, action) => {
       return { ...state, currentUser: action.payload };
     case userConst.ERROR_LOADING:
       return { ...state, ...action.payload }
+    case userConst.LOAD_AD_USERS:
+      return { ...state, userSearch: action.payload }
     default:
       return state;
   }

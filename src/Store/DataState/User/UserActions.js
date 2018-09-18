@@ -1,4 +1,4 @@
-import { fetchUser } from './UserAPI'
+import { fetchUser, fetchADUsers } from './UserAPI'
 import userConsts from './UserConsts';
 import localDb from '../../localDb';
 import { isEqual, omit } from 'lodash';
@@ -32,7 +32,16 @@ export const fetchMe = () => (dispatch, getState) => {
     .then(user => dispatch(loadUser(user))
     ).catch((error) => dispatch(errorLoadingUser(error)));
 }
+export const lookupADUsers = (searchString) => async (dispatch, getState) => {
+  try {
 
+    const response = await fetchADUsers(searchString);
+    const data = await response.json();
+    dispatch(loadAdUsers(data));
+  } catch (err) {
+
+  }
+}
 export const loadUser = (user) => {
   _updateLocalMe(user);
   return {
@@ -40,7 +49,12 @@ export const loadUser = (user) => {
     payload: { user, error: false }
   }
 }
-
+export const loadAdUsers = users => {
+  return {
+    type: userConsts.LOAD_AD_USERS,
+    payload: users
+  }
+}
 export const errorLoadingUser = (errorMessage) => {
   return {
     type: userConsts.ERROR_LOADING,
@@ -49,5 +63,6 @@ export const errorLoadingUser = (errorMessage) => {
 }
 
 export default {
-  fetchMe
+  fetchMe,
+  lookupADUsers
 }

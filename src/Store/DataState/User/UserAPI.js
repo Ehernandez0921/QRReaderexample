@@ -4,3 +4,8 @@ export const fetchUser = (userId) => {
     credentials: 'include'
   })
 }
+export const fetchADUsers = searchString => {
+  return fetch(`${userApi}/${searchString}`, {
+    credentials: 'include'
+  })
+}
