@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, DatePicker } from 'antd';
+import { Form, Icon, Input, Button, DatePicker, Select } from 'antd';
 const FormItem = Form.Item;
 class DowField extends Component {
   render() {
@@ -7,6 +7,8 @@ class DowField extends Component {
     switch (fieldType) {
       case 'date':
         return <DatePicker />;
+      case 'select':
+        return <Select {...this.otherProps} rule={rule} />
       case 'input':
       default:
         return <Input />;
