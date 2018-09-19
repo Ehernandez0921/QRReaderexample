@@ -12,7 +12,7 @@ export const mapDispatchToProps = (dispatch) => {
     rightDrawerActions: {
       toggleDrawer: show => dispatch(RightDrawerActions.toggleDrawer(show)),
       setModelColumns: columns => dispatch(RightDrawerActions.setDrawerModelColumns(columns)),
-      setDrawerProps: props => dispatch(rightDrawerActions.setDrawerProps(props))
+      setDrawerProps: props => dispatch(RightDrawerActions.setDrawerProps(props))
     },
     userActions: {
       fetchMe: () => dispatch(UserActions.fetchMe())
