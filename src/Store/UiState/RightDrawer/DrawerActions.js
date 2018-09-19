@@ -16,5 +16,6 @@ export const setDrawerModel = model => {
 }
 export default {
   toggleDrawer,
-  setDrawerModel
+  setDrawerModel,
+  setDrawerModelColumns
 }
