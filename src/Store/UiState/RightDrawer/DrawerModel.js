@@ -1,4 +1,5 @@
 export default {
   show: false,
-  model:{}
+  model: {},
+  modelColumns: []
 }
