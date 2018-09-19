@@ -8,6 +8,10 @@ export const setDrawerModelColumns = columns => {
     payload: columns
   }
 }
+export const setDrawerProps = props => ({
+  type: drawerConsts.SET_RIGHT_DRAWER_PROPS,
+  payload: props
+})
 export const setDrawerModel = model => {
   return {
     type: drawerConsts.SET_DRAWER_MODEL,
@@ -17,5 +21,6 @@ export const setDrawerModel = model => {
 export default {
   toggleDrawer,
   setDrawerModel,
-  setDrawerModelColumns
+  setDrawerModelColumns,
+  setDrawerProps
 }

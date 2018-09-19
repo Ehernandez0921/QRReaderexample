@@ -11,7 +11,8 @@ export const mapDispatchToProps = (dispatch) => {
     setSearchValue: searchValue => dispatch(HeaderActions.setSearchValue(searchValue)),
     rightDrawerActions: {
       toggleDrawer: show => dispatch(RightDrawerActions.toggleDrawer(show)),
-      setModelColumns: columns => dispatch(RightDrawerActions.setDrawerModelColumns(columns))
+      setModelColumns: columns => dispatch(RightDrawerActions.setDrawerModelColumns(columns)),
+      setDrawerProps: props => dispatch(rightDrawerActions.setDrawerProps(props))
     },
     userActions: {
       fetchMe: () => dispatch(UserActions.fetchMe())
