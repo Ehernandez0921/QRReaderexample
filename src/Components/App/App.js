@@ -8,6 +8,7 @@ import DowDrawer from '../DowDrawer/DowDrawer';
 import Breadcrumb from '../BreadCrumb/BreadCrumb'
 import AppConsts from '../../Store/DataState/App/AppConsts';
 import Routes from '../../Routes/Routes';
+import {  notification } from 'antd';
 const { Content } = Layout;
 
 class App extends Component {
@@ -19,6 +20,12 @@ class App extends Component {
   };
   goTo = (path) => {
     this.props.history.push(path);
+  }
+  showNotification=(type,{message,description})=>{
+    notification[type]({
+      message: message||'Notification Title',
+      description: description||'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+    });
   }
   goHome = (message) => {
     //TODO: will create message to show
@@ -52,7 +59,7 @@ class App extends Component {
             </Col>
           </Row>
           <Content style={{ margin: '24px 16px', padding: 24, background: '#fff', minHeight: 280 }}>
-            <Routes {...this.props} goTo={this.goTo} goHome={this.goHome} />
+            <Routes {...this.props} goTo={this.goTo} showNotification={this.showNotification} goHome={this.goHome} />
           </Content>
         </Layout>
       </Layout>
