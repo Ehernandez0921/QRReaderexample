@@ -41,12 +41,13 @@ class HorizontalLoginForm extends Component {
     this.props.validateFields && this.props.validateFields(!hasErrors(getFieldsError()));
   }
   onOkClick = (e) => {
-    this.props.form.validateFields((err, values) => {
-      if (err && this.props.validateForm) return false;
-      if (!err && this.props.validateForm) {
-        return this.props.onOkClick && this.props.onOkClick(e)
+    const { form, validateForm, onOkClick } = this.props;
+    form.validateFields((err, values) => {
+      if (err && validateForm) return false;
+      if (!err && validateForm) {
+        return onOkClick && onOkClick(values, e)
       }
-      this.props.onOkClick && this.props.onOkClick(e);
+      onOkClick && onOkClick(values, e);
     });
   }
   onCancelClick = (e) => {
@@ -89,7 +90,7 @@ class HorizontalLoginForm extends Component {
       return (
         getFieldDecorator(name, {
           rules: [...rules],
-        })(<Select placeholder="Select a person" >
+        })(<Select {...field} >
           {field.selectOptions.map((option, index) =>
             <Option key={`${name}select${index}`} value={option.value}>{option.title || option.value}</Option>
           )}
@@ -98,7 +99,7 @@ class HorizontalLoginForm extends Component {
     }
     return getFieldDecorator(name, {
       rules: [...rules],
-    })(<FieldItem disabled={disabled} format={format} {...customProps} />)
+    })(<FieldItem disabled={disabled} key={`${name}-${fieldIndex}`} format={format} {...customProps} />)
   }
   handleSubmit = (e) => {
     this.props.onFormSubmit && this.props.onFormSubmit(e);

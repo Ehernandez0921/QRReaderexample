@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { debounce, chain,orderBy, isEmpty } from 'lodash';
-import { Table, Input, Row, Col } from 'antd';
-import DowButton from './DowTableButton'
+import { debounce, chain, orderBy, isEmpty } from 'lodash';
+import { Table, Input, Row, Col, List } from 'antd';
+import DowButton from './DowTableButton';
+
 // const rowSelection = {
 //   onChange: (selectedRowKeys, selectedRows) => {
 //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
@@ -50,7 +51,7 @@ class DowTable extends Component {
     this.searchColumn(searchValue, dataIndex)
     this.setState({ searchText: { ...this.state.searchText, [dataIndex]: searchValue } });
   }
-  makeColumnsFilterable = (columns) => {
+  makeColumnsFilterable = (columns, dataSource) => {
     let { filteredInfo } = this.state;
     filteredInfo = filteredInfo || {};
     if (columns.length > 0 && columns[0].filter) return columns;
@@ -109,7 +110,10 @@ class DowTable extends Component {
         ...noTitleColumn,
       }
     });
-    return filteredColumns
+
+    //Dianne
+    if (dataSource.length !== 0)
+      return filteredColumns
   }
   fullFilter = (data) => {
     const tmpData = this.searchFilterData(data);
@@ -157,6 +161,7 @@ class DowTable extends Component {
   }
   onTableChange = () => {
     const { setFilteredRecords, dataSource } = this.props;
+    console.log(this.props, 'DowTable.js Line-162')
     const filters = this.filteredInfoObject();
     if (setFilteredRecords) {
       if (this.state.searchFilters.length === 0 && isEmpty(filters)) {
@@ -172,23 +177,55 @@ class DowTable extends Component {
     this.setState({ pagination, filteredInfo: filters, sorter }, this.onTableChange);
   }
   render() {
-    const { columns, buttons, dataSource, pagination } = this.props;
-    const tmpColumns = this.makeColumnsFilterable(columns);
+    const { columns, buttons, dataSource, pagination, actions } = this.props;
+
+    /*  const colNew = [];
+     for (let i = 0; i < columns.length - 4; i++) {
+       colNew.push({
+         title: columns[i].title,
+         dataIndex: columns[i].dataIndex,
+         render: columns[i].render,
+ 
+       });
+     } */
+
+    /*  const listData = [];
+     for (let i = 0; i < dataSource.length; i++) {
+       listData.push({
+         href: 'http://ant.design',
+         title: dataSource[i].id,
+         date: dataSource[i].CreatedDate,
+         description: dataSource[i].KTEXT,
+         dueDate: dataSource[i].DueDate,
+         equipmentNum: dataSource[i].EQUNR,
+         PMO: dataSource[i].AUFNR,
+         fLoc: dataSource[i].TPLNR
+ 
+       });
+     } */
+
+    //Dianne
+    const tmpColumns = this.makeColumnsFilterable(columns, dataSource);
+
     const tableData = this.fullFilter(dataSource);
+
     const tmpPagination = pagination ||
       {
         showSizeChanger: true,
         showQuickJumper: true,
         pageSizeOptions: ['10', '25', '50', '100', tableData.length > 700 ? '700' : tableData.length.toString()]
       };
+
     return (
       <div>
         {this.props.tableHeader && <Row style={{ textAlign: 'center' }}><h3>{this.props.tableHeader}</h3></Row>}
         {buttons && buttons.map((button) =>
           <DowButton {...button} key={`tableButton${button.name}`} onButtonClick={this.onButtonClick} />
         )}
+
         <Row>
-          <Col sm={0} md={24}>
+
+          <Col xs={0} md={24}>
             <Table
               {...this.props}
               onChange={this.tableChanged}
@@ -196,7 +233,26 @@ class DowTable extends Component {
               columns={tmpColumns}
               rowKey="id"
               pagination={tmpPagination}
-              size={tmpColumns.length > 6 ? 'small' : 'middle'}
+            // size={tmpColumns.length > 6 ? 'small' : 'middle'}
+            />
+          </Col>
+
+          <Col sm={24} md={0}>
+            <List
+              dataSource={tableData}
+              renderItem={(item, index) => (
+                <List.Item
+                  key={`${index}tblList`}
+                  actions={actions && actions(item)}
+                >
+                  <List.Item.Meta
+                    title={item.PMO}
+                    description={columns.map((column, index) => <div key={`${index}listColumn`}>{item[column.dataIndex]}</div>)}
+                  />
+
+                </List.Item>
+              )}
+            //size={tmpColumns.length < 6 ? 'small' : 'middle'}
             />
           </Col>
         </Row>
