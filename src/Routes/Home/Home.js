@@ -7,28 +7,25 @@ class Home extends Component {
         super(props);
         this.state = {
             result: "No result"
+           
         };
         this.handleScan = this.handleScan.bind(this);
     }
     componentDidUpdate = (prevProps, prevState) => {
+
         if (this.state.result !== prevState.result) {
-            window.open(this.state.result,'_blank')
+            const regexp = RegExp("^(http|https|ftp|www)://.*$");
+            if (regexp.test(this.state.result)) {
+                window.open(this.state.result,'_blank')
+            } else {
+                console.log(this.state.result);
+            }
         }
     }
     handleScan(result) {
         this.setState(()=>({result}));
-        // if (data && !this.state.scanned  ) {
-        //     console.log(data, 'Home.js Line-28')
-        //     this.setState({
-        //         result: data,
-        //         scanned: true
-        //     });
-        //     // var redirectWindow = window.open(data, '_blank');
-        //     // redirectWindow.location;
-        //     //Object.assign(document.createElement('a'), { target: '_blank', href: data }).click();
-        //     window.open(data, '_blank');
-        // }
     }
+
     handleError(err) {
         console.error(err);
     }
