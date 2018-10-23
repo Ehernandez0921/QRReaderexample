@@ -22,10 +22,6 @@ class Scanner extends Component {
         this.setState(() => ({ scanned: false }))
     }
     handleScan = (data) => {
-<<<<<<< HEAD
-=======
-        console.log('Scanner.js Line-25')
->>>>>>> cb05230449831592d4779ecaf5706fd74f4debbb
         this.props.onScan && data && this.props.onScan(data);
     }
     onSwithChange = (checked) => {
