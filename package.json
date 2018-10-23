@@ -5,11 +5,14 @@
   "dependencies": {
     "antd": "^3.4.4",
     "dexie": "^2.0.4",
+    "install": "^0.12.2",
     "moment": "^2.22.1",
+    "npm": "^6.4.1",
     "papaparse": "^4.4.0",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-loadable": "^5.3.1",
+    "react-qr-reader": "^2.1.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "redux": "^4.0.0",
@@ -18,6 +21,7 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "starthttps":"set HTTPS=true&&npm start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",

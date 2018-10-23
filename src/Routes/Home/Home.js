@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
-import HomePageSettings from './HomePageSettings'
+import QrReader from "react-qr-reader";
 class Home extends Component {
-  componentDidMount = (props) => {
-    this.props.setPageSettings(HomePageSettings)
+  constructor(props) {
+    super(props);
+    this.state = {
+      delay: 300,
+      result: "No result"
+    };
+    this.handleScan = this.handleScan.bind(this);
+  }
+  handleScan(data) {
+    console.log(data, 'Home.js Line-13')
+    if (data) {
+      this.setState({
+        result: data
+      });
+      window.open(data);
+    }
+  }
+  handleError(err) {
+    console.error(err);
   }
   render() {
     return (
-      <div >
-        This is the Home page. Edit the Hompepage and add any routes and settings at '/src/Routes' foder in the project. Will add guide to readMe in the folder. just browse in explorer
+      <div>
+        <QrReader
+          delay={this.state.delay}
+          onError={this.handleError}
+          onScan={this.handleScan}
+          style={{ width: "100%" }}
+        />
+        <p>{this.state.result}</p>
       </div>
     );
   }
