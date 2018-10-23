@@ -1,35 +1,33 @@
 import React, { Component } from 'react';
+import Scanner from '../../Components/Scanner/Scanner';
 import { Button } from 'antd';
 import QrReader from "react-qr-reader";
 class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            delay: 300,
-            result: "No result",
-            scanning: false
+            result: "No result"
         };
         this.handleScan = this.handleScan.bind(this);
     }
-    toggleScanning = (scan) => {
-        this.setState({
-            scanning: scan
-        });
-    }
-    startScanning = () => this.toggleScanning(true);
-    stopScanning = () => this.toggleScanning(false);
-
-    handleScan(data) {
-        console.log(data, 'Home.js Line-13')
-        if (data) {
-            this.setState({
-                result: data
-                
-            });
-            console.log(data);
-            Object.assign(document.createElement('a'), {target: '_blank', href: data }).click();
-            // window.open(data, '_blank');
+    componentDidUpdate = (prevProps, prevState) => {
+        if (this.state.result !== prevState.result) {
+            window.open(this.state.result,'_blank')
         }
+    }
+    handleScan(result) {
+        console.log(result, 'Home.js Line-26')
+        // if (data && !this.state.scanned  ) {
+        //     console.log(data, 'Home.js Line-28')
+        //     this.setState({
+        //         result: data,
+        //         scanned: true
+        //     });
+        //     // var redirectWindow = window.open(data, '_blank');
+        //     // redirectWindow.location;
+        //     //Object.assign(document.createElement('a'), { target: '_blank', href: data }).click();
+        //     window.open(data, '_blank');
+        // }
     }
     handleError(err) {
         console.error(err);
@@ -37,20 +35,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                {!this.state.scanning &&
-                    <Button onClick={this.startScanning}>Start Scanning</Button>
-                }
-                {this.state.scanning &&
-                    <div>
-                    <Button onClick={this.stopScanning}>Stop Scanning</Button>
-                    <QrReader
-                        delay={this.state.delay}
-                        onError={this.handleError}
-                        onScan={this.handleScan}
-                        style={{ width: "100%" }}
-                    />
-                    </div>
-                }
+                <Scanner onScan={this.handleScan} />
                 <p>{this.state.result}</p>
             </div>
         );
