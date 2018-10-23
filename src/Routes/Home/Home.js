@@ -16,7 +16,7 @@ class Home extends Component {
         }
     }
     handleScan(result) {
-        console.log(result, 'Home.js Line-26')
+        this.setState(()=>({result}));
         // if (data && !this.state.scanned  ) {
         //     console.log(data, 'Home.js Line-28')
         //     this.setState({
