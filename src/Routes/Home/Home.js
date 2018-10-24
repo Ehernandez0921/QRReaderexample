@@ -6,7 +6,7 @@ class Home extends Component {
         super(props);
         this.state = {
             result: "No result"
-           
+
         };
         this.handleScan = this.handleScan.bind(this);
     }
@@ -15,7 +15,7 @@ class Home extends Component {
         if (this.state.result !== prevState.result) {
             const regexp = RegExp("^(http|https|ftp|www)://.*$");
             if (regexp.test(this.state.result)) {
-                window.open(this.state.result,'_blank')
+                window.open(this.state.result, '_blank')
             } else {
                 console.log(this.state.result);
                 this.props.goTo(`/maggieScreen/${this.state.result}`)
@@ -24,7 +24,7 @@ class Home extends Component {
     }
 
     handleScan(result) {
-        this.setState(()=>({result}));
+        this.setState(() => ({ result }));
     }
 
     handleError(err) {
@@ -32,10 +32,7 @@ class Home extends Component {
     }
     render() {
         return (
-            <div>
-                <Scanner onScan={this.handleScan} />
-                <p>{this.state.result}</p>
-            </div>
+            <Scanner onScan={this.handleScan} />
         );
     }
 }
