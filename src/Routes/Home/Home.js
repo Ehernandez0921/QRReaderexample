@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Scanner from '../../Components/Scanner/Scanner';
-import { Button } from 'antd';
-import QrReader from "react-qr-reader";
+
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -19,9 +18,11 @@ class Home extends Component {
                 window.open(this.state.result,'_blank')
             } else {
                 console.log(this.state.result);
+                this.props.goTo(`/maggieScreen/${this.state.result}`)
             }
         }
     }
+
     handleScan(result) {
         this.setState(()=>({result}));
     }

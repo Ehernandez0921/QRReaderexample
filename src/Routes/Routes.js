@@ -16,7 +16,7 @@ class Routes extends Component {
     return (
       <div>
         <Route exact path="/" render={props => <Authenticator WrappedComponent={LoadableHome}{...this.props} {...props} />} />
-        <Route exact path="/maggieScreen" render={props => <Authenticator WrappedComponent={LoadableMaggieScreen}{...this.props} {...props} />} />
+        <Route exact path="/maggieScreen/:barcode" render={props => <Authenticator WrappedComponent={LoadableMaggieScreen}{...this.props} {...props} />} />
       </div>
     );
   }
