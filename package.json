@@ -2,7 +2,7 @@
   "name": "dow-template",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://api.upcdatabase.org",
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "antd": "^3.4.4",
     "axios": "^0.18.0",
@@ -10,6 +10,7 @@
     "express": "^4.16.4",
     "install": "^0.12.2",
     "moment": "^2.22.1",
+    "node-fetch": "^2.2.0",
     "npm": "^6.4.1",
     "papaparse": "^4.4.0",
     "quagga": "^0.12.1",
