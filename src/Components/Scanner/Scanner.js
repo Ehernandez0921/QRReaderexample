@@ -34,7 +34,10 @@ class Scanner extends Component {
     }
     onBarcodeScan = (result) => {
         const matched = this.state.barcodeScans.filter(item => item === result.codeResult.code);
-        if (matched.length > 2) {
+        if (matched.length > 3) {
+            this.setState({
+                barcodeScans: []
+            });
             this.handleScan(result.codeResult.code);
         } else {
             this.setState({
@@ -57,7 +60,7 @@ class Scanner extends Component {
                         QR    <Switch onChange={this.onSwithChange} />    Bar Code
                         </Col>
                 </Row>}
-            {scanning && scannerType == 'qr' &&
+            {scanning && scannerType === 'qr' &&
                 <Row>
                     <Col span={24}>
                         <QrReader
@@ -69,7 +72,7 @@ class Scanner extends Component {
                     </Col>
                 </Row>
             }
-            {scanning && scannerType == 'barcode' &&
+            {scanning && scannerType === 'barcode' &&
                 <Row>
                     <Col span={24}>
                         <BarcodeScanner

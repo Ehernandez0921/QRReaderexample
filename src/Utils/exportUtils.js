@@ -3,12 +3,13 @@ import { pick } from 'lodash';
 
 export const exportToFile = (collection, { headers, fileName } = {}) => {
   const formattedCollection = toCsv(formatHeaders(collection, headers));
+  var data;
   if (window.navigator.msSaveorOpenBlob) {
-    var data = ['\ufeff' + formattedCollection];
+     data = ['\ufeff' + formattedCollection];
     var blob = new Blob(data);
     window.navigator.msSaveOrOpenBlob(blob, fileName ? fileName : 'defaultExport.csv');
   } else {
-    var data = new Blob([formattedCollection], { type: 'text/csv' });
+     data = new Blob([formattedCollection], { type: 'text/csv' });
     var url = URL.createObjectURL(data);
     var anchor = document.createElement('a');
     anchor.href = url;
