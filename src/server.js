@@ -5,7 +5,7 @@ var fetch=require('node-fetch');
 
 app.get('/searchCode/:codeId', async function (req, res) {
   try {
-    const response = await fetch(`https://api.upcdatabase.org/product/${req.params.codeId}/70F7A52D147BABF68FA32CD9D6B01A0A`);
+    const response = await fetch(`http://api.walmartlabs.com/v1/items?apiKey=md6cpy6t4jk2y43rwp3epp8a&upc=${req.params.codeId}`);
     const data=await response.json();
     res.json(data)
   } catch (err) {
